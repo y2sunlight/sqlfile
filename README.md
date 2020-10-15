@@ -50,15 +50,15 @@ sqlfileはGET/POST両方のメソッドをサポートしているのでHTMLフ�
 
 ## SQLファイルの仕様
 
-* SQLスクリプトファイルにはSQL文、コメント、EVAL文を含みます。
-* 文はセミコロン( ; )で区切って複数入力できます。
-* 行コメント( -- Comment )とブロックコメント( /* Comment */ )の両方が使用できます。
-* 連続する空白( TAB, Space, 改行文字 )は1つの空白と同じにみなされます。
+- SQLスクリプトファイルにはSQL文、コメント、EVAL文を含みます。
+- 文はセミコロン( ; )で区切って複数入力できます。
+- 行コメント( -- Comment )とブロックコメント( /* Comment */ )の両方が使用できます。
+- 連続する空白( TAB, Space, 改行文字 )は1つの空白と同じにみなされます。
 
 EVAL文
-* EVAL文はPHPのeval関数で実行します。例えば： `EVAL sleep(1);`
-* 複文の実行はできません。
-* クォート処理をしていないので、`EVAL echo 'Hellow;';` などは途中で文が区切られエラーになります。
+- EVAL文はPHPのeval関数で実行します。例えば： `EVAL sleep(1);`
+- 複文の実行はできません。
+- クォート処理をしていないので、`EVAL echo 'Hellow;';` などは途中で文が区切られエラーになります。
 
 ## 実行例
 
@@ -88,6 +88,41 @@ http://localhost/sqlfile.php?f=sample.sql
 ~~~
 
 ![実行結果](http://www.y2sunlight.com/ground/lib/exe/fetch.php?w=463&h=183&tok=c9cf60&media=mariadb:10.4:sqlfile01.png)
+
+## クイックスタート
+
+#### データベースの作成
+
+データベースとユーザを作成します。
+
+例：
+- ホスト： localhost
+- データベース： sunlight_db
+- ユーザ： sunlight
+- パスワード： sunlight"
+
+#### ダウンロードと設定
+
+`sqlfile-main.zip` をダウンロードし、適当な場所に解凍して下さい。
+
+ダウンロードした `config.php` を上の「設定」の項を参考にして編集して下さい。
+
+
+#### Webサーバの起動
+
+ダウンロードした `sqlfile.php` の存在するディレクトリでPHPのビルトインサーバーを実行します。
+
+~~~
+php -S localhost:8888
+~~~
+
+#### sqlfileの実行
+
+ブラウザで以下のようにして `sqlfile.php` を実行します：
+
+~~~
+http://localhost:8888/sqlfile.php?f=sample.sql
+~~~
 
 
 ## リンク
