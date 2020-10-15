@@ -1,26 +1,17 @@
 <?php
-/**
- * Configuration
- */
 require 'utilities.php';
 
-// データベース接続先
-define("HOST",          "localhost");   // ホスト名
-define("USER_NAME",     "sunlight");    // ユーザ名
-define("PASSWORD",      "sunlight");    // パスワード
-define("DATABASE_NAME", "sunlight_db"); // データベース名
-define("PORT",          3306);          // ポート
-
-// SQLファイルの保存先
-define("SQL_PATH", dirname(__FILE__) . "/sql");
+/**
+ * 設定ファイルの読み込み
+ */
+$config = require 'config.php';
 
 /**
- * Main
+ * SQLスクリプトの取得
  */
-// SQスクリプト取得
 if (isset($_REQUEST['f']))
 {
-    $sql_file = SQL_PATH . "/{$_REQUEST['f']}";
+    $sql_file = ($config['sql_file']['path'] ?? '.') . "/{$_REQUEST['f']}";
     if (!file_exists($sql_file)) die('File does not exists');
 
     $sql_array = file_get_sql($sql_file);
@@ -34,17 +25,26 @@ else
     die('Illegal request');
 }
 
-// データベースへの接続
-$mysqli = @new mysqli( HOST, USER_NAME, PASSWORD, DATABASE_NAME, PORT );
+// データベース接続
+$mysqli = @new mysqli(
+    $config['database']['host'],
+    $config['database']['username'],
+    $config['database']['password'],
+    $config['database']['database_name'],
+    $config['database']['port']);
+
 if( $mysqli->connect_errno )
 {
     die($mysqli->connect_errno . ' : ' . $mysqli->connect_error);
 }
 
-// 文字セットの指定
-if (isset($_REQUEST['s']))
+// 初期SQLコマンドの読み込み
+if (isset($config['database']['initial_statements']))
 {
-    $mysqli->query('SET NAMES utf8');
+    foreach($config['database']['initial_statements'] as $statement)
+    {
+        $mysqli->query($statement);
+    }
 }
 
 // レスポンス処理
@@ -52,13 +52,13 @@ HTML_Begin();
 DoSqlScript( $mysqli, $sql_array );
 HTML_End();
 
-// データベースの切断
+// データベース接続切断
 $mysqli->close();
 
 /**
- * SQLスクリプトの実行
- * @param mysqli $mysqli　MySQLiオブジェクト
- * @param string[] $sql_text SQL文の配列
+ * SQL スクリプトの実行
+ * @param mysqli $mysqli　MySQLiP object
+ * @param string[] $sql_text Array of SQL text
  */
 function DoSqlScript( mysqli $mysqli, array $sql_text )
 {
