@@ -97,7 +97,7 @@ SELECT * FROM syain;
 
 #### ダウンロードと設定
 
-`sqlfile-main.zip` をダウンロードし、適当な場所に解凍して下さい。
+[リリース版](https://github.com/y2sunlight/sqlfile/releases)をダウンロードし、適当な場所に解凍して下さい。
 
 ダウンロードした `config.php` を上の「設定」の項を参考にして編集して下さい。
 
