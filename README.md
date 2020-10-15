@@ -36,15 +36,11 @@ return
 
 SQLファイルをURLのクエリ文字列で指定して実行します：
 
-~~~
-http://localhost/sqlfile.php?f=sample.sql
-~~~
+* http://localhost/sqlfile.php?f=sample.sql
 
 SQLテキストを直接指定したい場合は、以下のようにします：
 
-~~~
-http://localhost/sqlfile.php?t=SELECT%20*%20FROM%20syain
-~~~
+* http://localhost/sqlfile.php?t=SELECT%20*%20FROM%20syain
 
 sqlfileはGET/POST両方のメソッドをサポートしているのでHTMLフォームからも使用できます。
 
@@ -83,9 +79,7 @@ SELECT * FROM syain;
 
 上のSQLファイルを次のURLで実行します：
 
-~~~
-http://localhost/sqlfile.php?f=sample.sql
-~~~
+* http://localhost/sqlfile.php?f=sample.sql
 
 ![実行結果](http://www.y2sunlight.com/ground/lib/exe/fetch.php?w=463&h=183&tok=c9cf60&media=mariadb:10.4:sqlfile01.png)
 
@@ -112,17 +106,13 @@ http://localhost/sqlfile.php?f=sample.sql
 
 ダウンロードした `sqlfile.php` の存在するディレクトリでPHPのビルトインサーバーを実行します。
 
-~~~
-php -S localhost:8888
-~~~
+* php -S localhost:8888
 
 #### sqlfileの実行
 
 ブラウザで以下のようにして `sqlfile.php` を実行します：
 
-~~~
-http://localhost:8888/sqlfile.php?f=sample.sql
-~~~
+* http://localhost:8888/sqlfile.php?f=sample.sql
 
 
 ## リンク
