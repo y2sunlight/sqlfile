@@ -1,12 +1,12 @@
 <?php
 require 'utilities.php';
 
-/**
+/*
  * 設定ファイルの読み込み
  */
 $config = require 'config.php';
 
-/**
+/*
  * SQLスクリプトの取得
  */
 if (isset($_REQUEST['f']))
@@ -25,7 +25,9 @@ else
     die('Illegal request');
 }
 
-// データベース接続
+/*
+ * データベース接続
+ */
 $mysqli = @new mysqli(
     $config['database']['host'],
     $config['database']['username'],
@@ -47,7 +49,9 @@ if (isset($config['database']['initial_statements']))
     }
 }
 
-// レスポンス処理
+/*
+ * レスポンス処理
+ */
 HTML_Begin();
 DoSqlScript( $mysqli, $sql_array );
 HTML_End();
@@ -154,7 +158,7 @@ function DoSelect( mysqli $mysqli, string $sql )
 }
 
 /**
- *　マイクロ秒取得
+ * マイクロ秒取得
  * @return float
  */
 function microtime_as_float()
