@@ -1,6 +1,6 @@
 USE test;
-SET storage_engine = Aria;         #この設定は有効です
-SET character_set_database = sjis; #この設定は無意味です
+SET storage_engine = Aria;         -- この設定は有効です
+SET character_set_database = sjis; -- この設定は無意味です
 
 DROP TABLE IF EXISTS syain;
 CREATE TABLE syain (
