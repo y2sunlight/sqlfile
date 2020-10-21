@@ -47,9 +47,10 @@ sqlfileはGET/POST両方のメソッドをサポートしているのでHTMLフ�
 ## SQLファイルの仕様
 
 - SQLスクリプトファイルにはSQL文、コメント、EVAL文を含みます。
-- 文はセミコロン( ; )で区切って複数入力できます。
-- 行コメント( -- Comment )とブロックコメント( /* Comment */ )の両方が使用できます。
+- 文はセミコロン( `;` )で区切って複数入力できます。
+- 行コメント( `-- Comment` )とブロックコメント( `/* Comment */` )の両方が使用できます。
 - 連続する空白( TAB, Space, 改行文字 )は1つの空白と同じにみなされます。
+- 改行を出力したい場合は `#;` を行先頭に入力します。
 
 EVAL文
 - EVAL文はPHPのeval関数で実行します。例えば： `EVAL sleep(1);`
@@ -59,7 +60,7 @@ EVAL文
 ## 実行例
 
 ~~~sql
-# テーブル作成
+-- テーブル作成
 DROP TABLE IF EXISTS syain;
 CREATE TABLE syain (
   syain_no INT(10) NOT NULL,
@@ -68,12 +69,12 @@ CREATE TABLE syain (
   PRIMARY KEY (syain_no)
 );
 
-# テーブルにデータを挿入
+-- テーブルにデータを挿入
 INSERT INTO syain VALUES(1,'Suzuki',3);
 INSERT INTO syain VALUES(2,'Yamamoto',1);
 INSERT INTO syain VALUES(3,'Tanaka',2);
 
-# テーブルの検索
+-- テーブルの検索
 SELECT * FROM syain;
 ~~~
 
