@@ -71,12 +71,14 @@ function DoSqlScript( mysqli $mysqli, array $sql_text )
     $sqltime = 0;
     foreach( $sql_text as $sql )
     {
+        if ($sql=='#') $sql=''; # 空行
+
         // SQL文表示
         print HTML_Escape(strlen($sql)<80 ? $sql : substr($sql,0,80)." ...");
         print "<br />\n";
         ob_flush(); flush();
 
-        if ( !$sql ) continue; # 空行
+        if ( !$sql ) continue;
 
         // 特別なEVAL文の実行
         if ( preg_match( "/^eval\s+(.+)/i", $sql, $reg ) )
